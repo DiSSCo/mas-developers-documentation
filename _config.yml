@@ -1,1 +1,3 @@
-
+theme: jekyll-theme-minimal
+title: Machine Annotation Service Developer Documentation
+description: Documentation for developers of services to plug into the DiSSCo Core Architecture. 
