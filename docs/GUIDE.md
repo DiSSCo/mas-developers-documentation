@@ -346,4 +346,16 @@ provide as many of the following terms as possible.
 
 See
 the [MAS JSON Schema](https://schemas.dissco.tech/schemas/fdo-type/machine-annotation-service/latest/machine-annotation-service.json)
-for more information on the MAS data model. 
+or [MAS Terms Site](https://terms.dissco.tech/machine-annotation-service-terms)
+for more information on the MAS data model.
+
+# Conclusion
+
+Thank you for your commitment to enhancing the DiSSCo community through the development and
+deployment of MASs. By following the guidelines outlined in this guide, you are playing a crucial
+role in advancing biodiversity research. Whether through novel machine learning approaches,
+georeferencing tools, or automated data checks, the contribution of help improve natural science
+collection data quality across Europe. Machine Annotation Services not only support ongoing
+research, but also empower the scientific community to engage in meaningful post-publication
+curation. This collaborative approach enhances the value of digitized collections, ensuring they
+remain relevant and up to-date long after their initial publication.
