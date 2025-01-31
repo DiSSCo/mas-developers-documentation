@@ -33,6 +33,7 @@ jobs:
           bundler-cache: true
           cache-version: 0
           working-directory: '${{ github.workspace }}'
+      - name: Install Dependencies
         run: bundle install
       - name: Checkout
         uses: actions/checkout@v4
