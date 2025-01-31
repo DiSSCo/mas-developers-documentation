@@ -1,6 +1,2 @@
-remote_theme: pages-themes/minimal@v0.2.0
-title: Machine Annotation Service Developer Documentation!!!
+title: Machine Annotation Service Developer Documentation
 description: Documentation for developers of services to plug into the DiSSCo Core Architecture.
-
-plugins:
-  - jekyll-remote-theme
