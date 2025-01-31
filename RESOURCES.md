@@ -1,7 +1,8 @@
+---
 layout: page
-title: "Resources"
-permalink: /RESOURCES
-
+title: Resources
+permalink: /resources
+---
 # Your handy toolkit, all, in one page
 
 ## JSON Schemas

@@ -1,6 +1,8 @@
+---
 layout: page
-title: "Step-By-Step Guide"
-permalink: /GUIDE
+title: Step-by-step Guide
+permalink: /guide
+---
 
 This guide will walk you through the steps of developing MAS middleware. The development of these
 small programs has a big impact -- allowing you to plug your service into the DiSSCo architecture.
