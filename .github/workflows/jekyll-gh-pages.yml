@@ -32,7 +32,7 @@ jobs:
           ruby-version: '3.3'
           bundler-cache: true
           cache-version: 0
-          working-directory: '${{ github.workspace }}/docs'
+          working-directory: '${{ github.workspace }}'
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Pages
