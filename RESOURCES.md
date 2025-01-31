@@ -1,6 +1,6 @@
 layout: page
 title: "Resources"
-permalink: /resources
+permalink: /RESOURCES
 
 # Your handy toolkit, all, in one page
 
