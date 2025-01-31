@@ -2,12 +2,16 @@
 layout: page
 title: Step-by-step Guide
 permalink: /guide
+nav_order: 2
 ---
+
+1. TOC
+{:toc}
 
 This guide will walk you through the steps of developing MAS middleware. The development of these
 small programs has a big impact -- allowing you to plug your service into the DiSSCo architecture.
 
-# 1. Data Modelling
+# Data Modelling
 
 Before you develop adapt your service to DiSSCo, you need to think about the end result. What value
 does your service add?
@@ -186,7 +190,7 @@ Array indexes must be omitted - instead, use wildcards.
 Batching can only be done if the MAS sends annotations of one Type of object in one event - either
 Digital Specimens OR Media Objects.
 
-# 2. Development
+# Development
 
 Once you know your inputs and outputs of your MAS middleware, you're ready to start developing.
 
@@ -230,7 +234,7 @@ correct endpoint, depending on the environment is being run on.
 - Acceptance:  https://sandbox.dissco.tech/api/mjr/v1/{JOB-ID}
 - Production: https://api.dissco.eu/mjr/v1/{JOB_ID}
 
-# 3. Registration and Deployment
+# Registration and Deployment
 
 When the MAS middleware is finished, the DiSSCo team will help you register your Machine Annotation
 Service. The Orchestration Service is a DiSSCo service that creates deployment files for the MAS
