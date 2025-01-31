@@ -9,12 +9,13 @@ nav_order: 1
 {:toc}
 
 # Welcome
+{: .no_toc }
 
 Thank you for your interest in offering a Machine Annotation Service (MAS) for the DiSSCo community!
 Here you'll find information on how to adapt existing services for the DiSSCo platform with minimal
 effort.
 
-## About DiSSCo
+# About DiSSCo
 
 DiSSCo is a research infrastructure supporting **digitized natural science** collections. With over
 200 partners in 23 countries, DiSSCo aims to digitally unify all European natural science assets.
@@ -26,7 +27,7 @@ The DiSSCo core architecture aims to go beyond harmonising the data, however. Da
 be evaluated, enriched, and extended by the community, improving data quality across institutional
 boundaries. The way DiSSCo achieves this is through **annotations**.
 
-## What is an Annotation?
+# What is an Annotation?
 
 An annotation is an additional piece of information associated with a specimen or media object. An
 annotation is initially separate from its target. The annotation is then evaluated by experts, who
@@ -36,7 +37,7 @@ digitized European collection.
 
 *Also see the [annotation JSON Schema](https://schemas.dissco.tech/schemas/fdo-type/annotation/latest/annotation.json)*
 
-### What can be annotated?
+## What can be annotated?
 
 In DiSSCo, two kinds of objects can be annotated: **digital specimens** or **media objects**. The
 specific
@@ -54,7 +55,7 @@ specifically to the data according to the OpenDS specification.
 *What terms can be annotated?* The [DiSSCo Terms Site](https://terms.dissco.tech/) has the most up
 to-date information on openDS terms.
 
-### Why make an annotation?
+## Why make an annotation?
 
 The "motivation" of an annotation, or the "why" of it all, is an important part of the annotation.
 It determines how the annotation may change its target. The possible motivations are:
@@ -68,7 +69,7 @@ It determines how the annotation may change its target. The possible motivations
 - **Editing**: The user wants to edit an existing value of the specimen/media
 - **Commenting**: The user wants to make a generic comment on the specimen/media
 
-### Who can make annotations?
+## Who can make annotations?
 
 Human experts can manually annotate resources using DiSSCo's DiSSCover
 platform. However, machines may annotate on a much larger scale. Machine Annotation Services (MASs)
@@ -77,7 +78,7 @@ may be triggered
 automatically, when a digital object is first ingested into the system, or may be scheduled by a
 user in DiSSCover. MASs often use external APIs or AI to produce their annotations.
 
-### Why develop a MAS?
+# Why develop a MAS?
 
 If you've developed a service that analyzes specimen data, you may be wondering why bother with
 publishing it on
