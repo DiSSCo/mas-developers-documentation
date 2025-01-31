@@ -1,3 +1,9 @@
+---
+layout: page
+title: Welcome
+permalink: /
+---
+
 # Welcome
 
 Thank you for your interest in offering a Machine Annotation Service (MAS) for the DiSSCo community!
