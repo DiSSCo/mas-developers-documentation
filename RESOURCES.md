@@ -29,7 +29,7 @@ nav_order: 3
 - [DiSSCover - Production](https://disscover.dissco.eu/) 
 - [Swagger Endpoint]()
 
-## Terms
+## Glossary
 
 **Annotation**: An additional piece of information associated with a specimen or media object
 
