@@ -10,13 +10,13 @@ nav_order: 2
 This guide will walk you through the steps of developing MAS middleware for your existing value
 service. The process for developing a MAS middleware can be summarized as follows:
 
-| Step                                                                                            | Section                                            
-|:------------------------------------------------------------------------------------------------|:---------------------------------------------------|
-| 1. Receive the target as JSON                                                                   | [Data Modelling](/guide/data-model)                |
-| 2. Extract values from the target you need as input for your service, e.g. some OpenDS fields   | [Data Modelling](/guide/data-model)                | 
-| 3. Create a function that adds value, usually calling an external API that is the value service | [Development](/guide/development)                  | 
-| 4. Publish the output as an annotation event                                                    | [Development](/guide/development)                  |
-| 5. Package your code into a Docker container                                                    | [Registration and Deployment](/guide/registration) |
+| Step                                                                                            | Section                                                                         
+|:------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------|
+| 1. Receive the target as JSON                                                                   | [Data Modelling](/mas-developers-documentation/guide/data-model)                |
+| 2. Extract values from the target you need as input for your service, e.g. some OpenDS fields   | [Data Modelling](/mas-developers-documentation/guide/data-model)                | 
+| 3. Create a function that adds value, usually calling an external API that is the value service | [Development](/mas-developers-documentation/guide/development)                  | 
+| 4. Publish the output as an annotation event                                                    | [Development](/mas-developers-documentation/guide/development)                  |
+| 5. Package your code into a Docker container                                                    | [Registration and Deployment](/mas-developers-documentation/guide/registration) |
 
 {: .note }
 > When an existing service is adapted to work within DiSSCo, there are two components involved:
@@ -27,7 +27,6 @@ service. The process for developing a MAS middleware can be summarized as follow
 > - **MAS Middleware**: This is a lightweight component containerized and deployed on the DiSSCo
     core
     architecture.
-
 
 # Thank you!
 

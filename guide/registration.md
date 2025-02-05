@@ -10,16 +10,13 @@ nav_order: 3
 
 {: .no_toc }
 
-- TOC
-{:toc}
-
 When the MAS middleware is finished, the DiSSCo team will help you register your Machine Annotation
 Service. The Orchestration Service is a DiSSCo service that creates deployment files for the MAS
 middleware. Once a MAS is registered, it will be available in the DiSSCo test environment. To
 register a MAS, the DiSSCo team needs the following information.
 
 - TOC
-{:toc}
+  {:toc}
 
 # Valid Dockerfile
 
@@ -125,7 +122,8 @@ the following:
 
 # Filters
 
-The filters you determined in the [data modelling](/guide/data-model) step must be sent to DiSSCo.
+The filters you determined in the [data modelling](/mas-developers-documentation/guide/data-model)
+step must be sent to DiSSCo.
 
 # Batching Permitted
 
@@ -137,8 +135,9 @@ resources, streamlining the process and conserving resources.
 
 However, it's important to note that a MAS must be specifically designed with batching in mind, as
 it requires additional metadata to support this functionality. For detailed guidance on developing a
-batch-enabled MAS, please refer to the [batching](#batching-annotations) section earlier in this
-guide.
+batch-enabled MAS, please refer to
+the [batching](/mas-developers-documentation/guide/data/#batching-annotations) notes in the data
+modelling section.
 
 # Other Metadata
 
@@ -156,6 +155,7 @@ provide as many of the following terms as possible.
 - Contact point (Description, email, url, phone)
 - SLA Documentation
 
+{: .note}
 See
 the [MAS JSON Schema](https://schemas.dissco.tech/schemas/fdo-type/machine-annotation-service/latest/machine-annotation-service.json)
 or [MAS Terms Site](https://terms.dissco.tech/machine-annotation-service-terms)
