@@ -2,5 +2,26 @@ theme: just-the-docs
 title: Machine Annotation Service Developer Documentation
 description: Documentation for developers of services to plug into the DiSSCo Core Architecture.
 
+callouts:
+  note:
+    title: Good to Know
+    color: blue
+  warning:
+    title: Warning
+    color: yellow
+
+aux_links:
+  Need help?:
+    - https://github.com/DiSSCo/mas-developers-documentation/issues/new?template=Blank+issue
+
+# External navigation links
+nav_external_links:
+  - title: DiSSCover Sandbox Environment
+    url: https://disscover.dissco.eu/
+    opens_in_new_tab: true
+  - title: OpenDS Terms Page
+    url: https://terms.dissco.tech/
+    opens_in_new_tab: true
+
 plugins:
   - jekyll-default-layout

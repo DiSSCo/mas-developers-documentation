@@ -2,7 +2,8 @@
 layout: page
 title: Resources
 permalink: /resources
-nav_order: 3
+nav_order: 4
+has_toc: false
 ---
 # Your handy toolkit, all, in one page
 
@@ -31,10 +32,10 @@ nav_order: 3
 
 ## Glossary
 
-**Annotation**: An additional piece of information associated with a specimen or media object
+- **Annotation**: An additional piece of information associated with a specimen or media object
+- **DiSSCo**: Distributed System of Scientific Collections, a European research infrastructure for digitized natural science collections
+- **MAS**: Machine Annotation Service, an automated service that produces annotations on DiSSCo data.
+- **MAS middleware**: A lightweight program used to adapt an existing service into a MAS.
+- **Value Service**: An existing service being adapted to DiSSCo.
 
-**MAS**: Machine Annotation Service, an automated service that produces annotations on DiSSCo data.
 
-**MAS Middleware**: A lightweight program used to adapt an existing service into a MAS.
-
-**DiSSCo**: Distributed System of Scientific Collections, a European research infrastructure for digitized natural science collections

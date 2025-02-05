@@ -3,13 +3,12 @@ layout: page
 title: Home
 permalink: /
 nav_order: 1
-
 ---
-- TOC
-{:toc}
-
 # Welcome
 {: .no_toc }
+
+- TOC
+{:toc}
 
 Thank you for your interest in offering a Machine Annotation Service (MAS) for the DiSSCo community!
 Here you'll find information on how to adapt existing services for the DiSSCo platform with minimal
@@ -35,13 +34,20 @@ may reject or accept the annotation. An accepted annotation may then change the 
 object in the source system. This approach allows for widespread community curation of the entire
 digitized European collection.
 
-*Also see the [annotation JSON Schema](https://schemas.dissco.tech/schemas/fdo-type/annotation/latest/annotation.json)*
+*Also see
+the [annotation JSON Schema](https://schemas.dissco.tech/schemas/fdo-type/annotation/latest/annotation.json)*
+
+## What is a Machine Annotation Service?
+
+A Machine Annotation Service (MAS) is an automated service that annotates a target in DiSSCo. These
+services are scheduled by users on individual specimen or media in DiSSCo. What a MAS offers is
+broad. From sophisticated AI services to taxonomic services to linking to other infrastructures,
+MASs add value to natural science collections data in all sorts of ways. 
 
 ## What can be annotated?
 
 In DiSSCo, two kinds of objects can be annotated: **digital specimens** or **media objects**. The
-specific
-object being annotated is the "target" of the annotation.
+specific object being annotated is the "target" of the annotation.
 
 What part of the target is being annotated is another important aspect of the annotation. The
 annotation may be as broad, or as narrow, as necessary. This is called the "selector", and relates
