@@ -6,6 +6,7 @@ nav_order: 3
 ---
 
 # DiSSCo Core Architecture
+
 {: .no_toc }
 
 - TOC
@@ -102,10 +103,11 @@ it. The annotation is then available through the DiSSCo API and the DiSSCover in
 
 ## MAS Deployment
 
-The MAS middleware application is deployed as a container on the DiSSCo core architecture.
+The MAS middleware application is deployed as a container on the DiSSCo core architecture. The value
+service will remain deployed where it was originally.
 
-Good to know
-
-- The MAS middleware is deployed on the DiSSCo network. If your value service requires whitelisting
-  a specific IP address, 
+{: .note}
+The MAS middleware is deployed on the DiSSCo network. If your value service requires whitelisting a
+specific IP address, let the DiSSCo team know so they can provide your MAS middleware with a static
+IP address. That way, the middleware may communicate with the value service. 
 
