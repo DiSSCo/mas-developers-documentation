@@ -17,6 +17,7 @@ service. The process for developing a MAS middleware can be summarized as follow
 | 3. Create a function that adds value, usually calling an external API that is the value service | [Development](/mas-developers-documentation/guide/development)                  | 
 | 4. Publish the output as an annotation event                                                    | [Development](/mas-developers-documentation/guide/development)                  |
 | 5. Package your code into a Docker container                                                    | [Registration and Deployment](/mas-developers-documentation/guide/registration) |
+| 6. Test out your MAS on DiSSCover                                                               | [Try it out!](/mas-developers-documentation/guide/scheduling)
 
 {: .note }
 > When an existing service is adapted to work within DiSSCo, there are two components involved:

@@ -18,12 +18,30 @@ register a MAS, the DiSSCo team needs the following information.
 - TOC
   {:toc}
 
-# Valid Dockerfile
+# Create a pull request
+
+MASs are all available on our
+MAS [GitHub repository](https://github.com/DiSSCo/demo-enrichment-service-image). When your service
+is ready, you should create a pull request on this repo with your new service. Your pull request
+should meet the following requirements:
+
+- **Code Quality** : Code should be run through a code quality checker ("linter"). By default, the
+  DiSSCo pipeline runs code through the linter SonarQube and requires 0 code smells to move forward.
+- **Requirements.txt**: Please include a `requirements.txt` file
+- **Valid Dockerfile**: Your service must include a valid Dockerfile
+- **Workflow file**: Include a GitHub workflow yaml file for your service in the `.github/workflows`
+  directory. It shoud be based
+  on [existing workflow files](https://github.com/DiSSCo/demo-enrichment-service-image/blob/main/.github/workflows/osm-georeferencing-pipeline.yml)
+
+## Deploying with Docker
 
 When you've completed developing your MAS middleware, you're ready to containerize it. These
 services are deployed as a container image in DiSSCo. As such, make sure
-there is a valid Docker file in the source code. The DiSSCo team will build the image and push it to
-the DiSSCo Elastic Container Registry.
+there is a valid Docker file in the source code.
+
+Pushing to the main branch triggers GitHub actions. During this pipeline, the image is built and
+deployed to the DiSSCo AWS container registry. This image is then managed by kubernetes and is
+launched when a user schedules your service.
 
 {: .warning}
 DiSSCo is only responsible for the deployment of the MAS middleware. The value service
@@ -161,6 +179,11 @@ the [MAS JSON Schema](https://schemas.dissco.tech/schemas/fdo-type/machine-annot
 or [MAS Terms Site](https://terms.dissco.tech/machine-annotation-service-terms)
 for more information on the MAS data model.
 
+# Moving to production - Service Level Agreements (SLA)
+
+In order to move your MAS to the production environment, an SLA must be established between DiSSCo
+and your organisation. This procedure is still in development - check back soon for more updates. 
+
 # Moving Forward - Checklist
 
 - You've successfully containerized your MAS using Docker
@@ -169,4 +192,4 @@ for more information on the MAS data model.
 - You've sent the DiSSco team any additional metadata about your MAS
 
 All set! The DiSSCo team will deploy your MAS middleware, and you should be able to use your MAS in
-the acceptance environment! 
+the sandbox environment! 
