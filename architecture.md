@@ -32,7 +32,7 @@ agents rest on top of the
 core infrastructure, adding additional value. On the right, the enriched data is sent to data
 consumers.
 
-![DiSSCo's position in the biodiversity data landscape](assets/DiSSCo_Architecture.png)
+![DiSSCo's position in the biodiversity data landscape](assets/dissco_arch.png)
 
 Other value services of DiSSCo:
 
