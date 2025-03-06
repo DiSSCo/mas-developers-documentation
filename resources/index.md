@@ -25,10 +25,12 @@ has_toc: false
 - [Example MASs](https://github.com/DiSSCo/demo-enrichment-service-image/)
 
 ## DiSSCo
-- [DiSSCover - Test](https://dev.dissco.tech/)
-- [DiSSCover - Acceptance](https://sandbox.dissco.tech/)
-- [DiSSCover - Production](https://disscover.dissco.eu/) 
-- [Swagger Endpoint]()
+- [DiSSCover - Acceptance Environment](https://sandbox.dissco.tech/)
+  - [Acceptance Swagger Endpoint](https://sandbox.dissco.tech/api/docs/swagger-ui/index.html)
+- [DiSSCover - Production Environment](https://disscover.dissco.eu/)
+- [DiSSCo Program Site](https://www.dissco.eu/)
+- [Technical Blog](https://dissco.tech/)
+
 
 ## Glossary
 

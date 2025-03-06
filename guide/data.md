@@ -5,7 +5,9 @@ permalink: /guide/data-model
 parent: Step-by-step Guide
 nav_order: 1
 ---
+
 # Data Modelling
+
 {: .no_toc }
 
 - TOC
@@ -194,7 +196,6 @@ Array indexes must be omitted - instead, use wildcards.
 Batching can only be done if the MAS sends annotations of one Type of object in one event - either
 Digital Specimens OR Media Objects.
 
-
 # Filters
 
 Filters are a valuable tool for ensuring that only relevant digital objects are processed by the
@@ -230,6 +231,40 @@ In the example above, the MAS will only process objects that meet the following 
 - The basis of record is MaterialEntity.
 - The object contains at least one identifier (non-null).
 
+## Including both Specimen and Media Filters
+
+Your MAS may target media objects, but it may have limitations as to which types of subjects it can
+process. For example, a MAS that looks at images of herbarium sheets. In that case, the target (the
+media object) will not have information on what the specimen is.
+
+If your MAS requires information about the specimen and the media object, the specimen-specific
+filters need to begin with `$['digitalSpecimen']`.
+
+{: .note}
+To see which fields are in the media data model, and which fields are in the specimen data model,
+see the [OpenDS terms page](https://terms.dissco.tech/)
+
+A filter for a MAS that targets media objects, but needs the subject to be a botany specimen, may
+have the following filters:
+
+```json
+{
+  "$['ods:fdoType']": [
+    "https://doi.org/21.T11148/bbad8c4e101e8af01115"
+  ],
+  "$['ac:accessURI']": [
+    "*"
+  ],
+  "$['digitalSpecimen']['ods:topicDiscipline']": [
+    "Botany"
+  ]
+}
+```
+
+This indicates the target fdo type is `https://doi.org/21.T11148/bbad8c4e101e8af01115` (media
+object), the target has an access URI, and it is linked to a digital specimen with a topic
+discipline "Botany".
+
 ## ods:FDOType
 
 FDO (FAIR Digital Object) Types are blueprints for digital objects. In OpenDS, a unique, resolvable
@@ -238,10 +273,11 @@ helps distinguish between different kinds of objects in DiSSCo.
 
 The two key Types in DiSSCo are:
 
-- Digital Specimen: https://doi.org/21.T11148/894b1e6cad57e921764e
-- Digital Media: https://doi.org/21.T11148/bbad8c4e101e8af01115
+- Digital Specimen: [https://doi.org/21.T11148/894b1e6cad57e921764e](https://doi.org/21.T11148/894b1e6cad57e921764e)
+- Digital Media: [https://doi.org/21.T11148/bbad8c4e101e8af01115](https://doi.org/21.T11148/bbad8c4e101e8af01115)
 
 # Moving Forward - Checklist
+
 - You've determined which openDS fields should be used as input for your value service
 - You've mapped the output of your value service to openDS terms
 - You've established filters on what kind of objects your MAS will accept
