@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Architecture"
+title: "DiSSCo Architecture"
 permalink: /architecture
 nav_order: 3
 ---

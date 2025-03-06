@@ -16,7 +16,7 @@ middleware. Once a MAS is registered, it will be available in the DiSSCo test en
 register a MAS, the DiSSCo team needs the following information.
 
 - TOC
-  {:toc}
+{:toc}
 
 # Create a pull request
 
