@@ -7,6 +7,7 @@ nav_order: 2
 ---
 
 # Development Guide
+
 {: .no_toc }
 
 Once you know your inputs and outputs of your MAS middleware, you're ready to start developing.
@@ -51,8 +52,8 @@ message is sent with the topic defined previously.
 ```python
 
 for msg in consumer:
-    json_value = msg.value
-    object_data = json_value['data']
+  json_value = msg.value
+  object_data = json_value['data']
 ```
 
 # Templates
@@ -92,7 +93,7 @@ correct endpoint, depending on the environment is being run on.
 Your MAS may produce one, multiple, or no annotations on one target. This section explains how to
 handle multiple or no annotations.
 
-## If your MAS has multiple insights
+## If your MAS has Multiple Insights
 
 Your MAS may have multiple, distinct contributions to a target. There are two ways to handle this:
 
@@ -115,20 +116,43 @@ Your MAS may have multiple, distinct contributions to a target. There are two wa
    different segments of an image, or a taxonomic service that assesses different taxonomic fields (
    e.g. dwc:genus and dwc:species).
 
-## If your MAS produces no annotation
+## If Your MAS has No Insights
 
-If your annotation produces no annotation, it must return an event with an empty annotations array.
-This informs the user that the job was successfully completed, but resulted in no annotations. If no
-response is received, the job will be marked as FAILED after a timeout period.
+If your MAS finds no results, that is still useful information for the user. A "no annotation"
+annotation may provide useful insights into the target. If a plant organ detection tool finds no
+plant organs, a species recognition tool can not identify the specimen, or a locality can not be
+georeferenced, that information should still be captured in an annotation.
 
-Empty annotation event:
+Qualities of a "no annotation" annotation
+
+* **oa:motivation**: The motivation should be `oa:commenting`
+* **ods:hasSelector**: The selector determines which field(s) of the target are targeted. Note that
+  a `commenting` annotation may not be on a field that doesn't exist in the target. 
+  * The selector type may either be `ods:ClassSelector` or `ods:TermSelector`
+  * Which field or class you target in this kind of annotation depends on your MAS, but 
+* **oa:value**: A simple message for the user indicating this job has no results: Examples:
+  * "Unable to find a match"
+  * "Too many potential matches"
+
+## If your MAS Fails (Exception Handling)
+
+If your MAS experiences an exception for whatever reason, that information should still be passed to
+DiSSCo. That information is used to mark the job as `FAILED` and inform the user of any errors.
+
+{: .note }
+Send the message to the kafka topic `mas-failed`, not the topic specific to your MAS.
+
+The failure message has the following structure:
 
 ```json
 {
-  "jobId": "44df54c5-e2b5-4c2e-ab3a-b0df1a77934b",
-  "annotations": []
+  "jobId": "20.5000.1025/AAA-BBB-CCC",
+  "errorMessage": "Client error"
 }
 ```
+
+Where `jobId` is the job ID provided to your MAS in the request, and `errorMessage` is the error
+message you want to pass to DiSSCo.
 
 # Testing
 
@@ -145,17 +169,19 @@ import logging
 
 
 def run_local():
-    response = requests.get(
-        'https://sandbox.dissco.tech/apidigital-specimen/v1/SANDBOX/3L8-AS3-E1T')
-    specimen = json.loads(response.content).get("data").get(
-        'attributes')  # Extract data from API call
-    result = run_mas(specimen)  # Run your MAS service
-    annotation_event = map_to_annotation_event(specimen_data, result,
-                                               str(uuid.uuid4()))  # Turn result into an annotation event
-    logging.info("Created annotations: ", annotation_event)  # Validate this against schema
+  response = requests.get(
+    'https://sandbox.dissco.tech/apidigital-specimen/v1/SANDBOX/3L8-AS3-E1T')
+  specimen = json.loads(response.content).get("data").get(
+    'attributes')  # Extract data from API call
+  result = run_mas(specimen)  # Run your MAS service
+  annotation_event = map_to_annotation_event(specimen_data, result,
+                                             str(
+                                               uuid.uuid4()))  # Turn result into an annotation event
+  logging.info("Created annotations: ", annotation_event)  # Validate this against schema
 ```
 
 # Moving Forward - Checklist
+
 - You've determined the motivation(s) of your annotation(s)
 - You know what selector to use, and what part of the target you're annotating
 - You have a python script that accepts a target and outputs a valid annotation event
