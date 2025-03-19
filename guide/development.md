@@ -84,9 +84,9 @@ The endpoint has no body, and is reached at `/api/mjr/v1/{JOB-ID}`.
 In deployment, DiSSCo automatically populates the `RUNNING_ENDPOINT` environmental variable with the
 correct endpoint, depending on the environment is being run on.
 
-- Test: [https://dev.dissco.tech/api/mjr/v1/{JOB-ID}]
-- Acceptance:  [https://sandbox.dissco.tech/api/mjr/v1/{JOB-ID}]
-- Production: [https://api.dissco.eu/mjr/v1/{JOB_ID}]
+- Test: `https://dev.dissco.tech/api/mjr/v1/{JOB-ID}`
+- Acceptance: `https://sandbox.dissco.tech/api/mjr/v1/{JOB-ID}`
+- Production: `https://api.dissco.eu/mjr/v1/{JOB_ID}`
 
 # How Many Annotations Can You Return?
 
@@ -97,10 +97,10 @@ handle multiple or no annotations.
 
 Your MAS may have multiple, distinct contributions to a target. There are two ways to handle this:
 
-1. **`oa:hasBody`**: The body of the annotation contains the specific value of the annotation. It is
-   an array, so multiple values may be added. However, all values in the body are part of the same
-   annotation, meaning they have the same motivation, target, selector (what part of the target does
-   the annotation apply to), and other parameters.
+1. **In an array**: `oa:value` is a field in the Body of the annotation which contains the insights
+   your MAS produces. This field is an array, so multiple values may be added. However, all values
+   in the body are part of the same annotation, meaning they have the same motivation, target,
+   selector (what part of the target does the annotation apply to), and other parameters.
 
    **Use multiple bodies when**: Your MAS has multiple insights on the same part of the target, with
    the same motivation. Example: An AI service that provides two different classifications on the
@@ -127,12 +127,12 @@ Qualities of a "no annotation" annotation
 
 * **oa:motivation**: The motivation should be `oa:commenting`
 * **ods:hasSelector**: The selector determines which field(s) of the target are targeted. Note that
-  a `commenting` annotation may not be on a field that doesn't exist in the target. 
-  * The selector type may either be `ods:ClassSelector` or `ods:TermSelector`
-  * Which field or class you target in this kind of annotation depends on your MAS, but 
+  a `commenting` annotation may not be on a field that doesn't exist in the target.
+    * The selector type may either be `ods:ClassSelector` or `ods:TermSelector`
+    * Which field or class you target in this kind of annotation depends on your MAS, but
 * **oa:value**: A simple message for the user indicating this job has no results: Examples:
-  * "Unable to find a match"
-  * "Too many potential matches"
+    * "Unable to find a match"
+    * "Too many potential matches"
 
 ## If your MAS Fails (Exception Handling)
 
@@ -182,8 +182,9 @@ def run_local():
 
 # Moving Forward - Checklist
 
-- You've determined the motivation(s) of your annotation(s)
 - You know what selector to use, and what part of the target you're annotating
 - You have a python script that accepts a target and outputs a valid annotation event
-- You've tested your MAS locally and it validates against the relevant schemas
+- Your MAS wrapper still captures "no result" information appropriately
+- Your MAS sends an error message if an exception is raised
+- You've tested your MAS locally, and it validates against the relevant schemas
 

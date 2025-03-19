@@ -17,14 +17,14 @@ in the [sandbox environment](https://sandbox.dissco.tech/).
 
 ## Scheduling through DiSSCover
 
-**1. Sign Up**
+**1. Sign Up and Sign In**
 
 In order to create annotations through DiSSCo, you need to be logged in and have an ORCID associated
 with your account. This allows DiSSCo to track annotation provenance and associate it with a user.
 ORCIDs are free, globally unique identifiers for researchers and contributors. No
 ORCID? [Register for one here](https://orcid.org/register)!
 
-**2. Select a target**
+**2. Select a Target**
 
 Search for a specimen through the DiSSCover interface and find a suitable target. You may filter on
 discipline, taxonomy, organisation, if the specimen has media, and many other parameters.
@@ -70,5 +70,6 @@ the [/digital-specimen/{mas}](https://dev.dissco.tech/api/docs/swagger-ui/index.
 and [/digital-media/{mas}](https://dev.dissco.tech/api/docs/swagger-ui/index.html#/digital-specimen-controller/scheduleMassForDigitalSpecimen)
 endpoints for more information.
 
-Note: in order to use the API to schedule MASs, you will need an authenticated token. Reach out to
+{: .note}
+in order to use the API to schedule MASs, you will need an authenticated token. Reach out to
 the DiSSCo team for more information.
