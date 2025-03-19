@@ -42,7 +42,7 @@ the [annotation JSON Schema](https://schemas.dissco.tech/schemas/fdo-type/annota
 A Machine Annotation Service (MAS) is an automated service that annotates a target in DiSSCo. These
 services are scheduled by users on individual specimen or media in DiSSCo. What a MAS offers is
 broad. From sophisticated AI services to taxonomic services to linking to other infrastructures,
-MASs add value to natural science collections data in all sorts of ways. 
+MASs add value to natural science collections data in all sorts of ways.
 
 ## What can be annotated?
 
@@ -74,6 +74,10 @@ It determines how the annotation may change its target. The possible motivations
   flags)
 - **Editing**: The user wants to edit an existing value of the specimen/media
 - **Commenting**: The user wants to make a generic comment on the specimen/media
+
+**Note**: Only the `ods:adding` may reference a part of the target that doesn't exist yet because you
+are adding information to the target. If you are creating an annotation with another motivation, you
+must make sure you're selecting on a part of the target that exists. (How can you comment or edit something that doesn't exist?)
 
 ## Who can make annotations?
 

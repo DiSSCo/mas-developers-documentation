@@ -187,7 +187,7 @@ and your organisation. This procedure is still in development - check back soon 
 # Moving Forward - Checklist
 
 - You've successfully containerized your MAS using Docker
-- You've sent the DiSSCo team your environmental variables and (securely) sent your secrets
+- You've sent the DiSSCo team your environmental variables and (securely!) sent your secrets
 - You've sent the DiSSCo team the filters associated with your MAS
 - You've sent the DiSSco team any additional metadata about your MAS
 
