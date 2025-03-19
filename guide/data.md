@@ -32,6 +32,136 @@ Some questions to consider:
 {: .note }
 You can find more about openDS on the [OpenDS terms site](https://terms.dissco.tech/)
 
+## What makes a good annotation?
+
+When an annotation is accepted, it updates the specimen with new, valuable information.
+A good annotation can be easily integrated into the target once it is accepted.
+
+- `oa:value`: the value of the annotation ("**What** does the annotation say?")
+- `ods:hasSelector`: the part of the target you're annotating ("**Where** is the annotation going?")
+- `oa:motivation`: Motivation for what why the annotation was produced (**How** is the information
+  integrated)
+
+{: .note}
+> The available motivations are: `ods:adding`, `ods:deleting`, `oa:assessing`, `oa:editing`,
+`oa:commenting`.
+> Only the `ods:adding` may reference a part of the target that doesn't exist yet because you are
+> adding information to the target.
+> Read more about [motivations](/mas-developers-documentation/#why-make-an-annotation)
+> and [selectors](/mas-developers-documentation/#what-can-be-annotated)
+
+### Example
+
+Say you have a MAS that identifies taxonomy from an image. Your MAS should target the
+`ods:hasTaxonIdentifications` class of a specimen.
+
+*Note: Some fields have been removed from the example annotations for brevity*
+
+**Bad - Commenting on the specimen**
+
+The following annotation comments on a specimen's taxonomy.
+
+- This annotation targets the entire first instance of the `TaxonIdentifications` class, instead of
+  a specific field
+- The comment is not machine actionable - this information can not be integrated directly into the
+  specimen
+
+While it does provide useful information, this annotation can not be integrated into the specimen
+without additional work.
+
+```json
+{
+  "oa:motivation": "oa:commenting",
+  "oa:hasTarget": {
+    "@id": "https://doi.org/10.3535/XYZ-XYZ-XYZ",
+    "@type": "ods:DigitalSpecimen",
+    "oa:hasSelector": {
+      "@type": "ods:ClassSelector",
+      "ods:term": "$['ods:hasTaxonIdentifications'][0]"
+    }
+  },
+  "oa:hasBody": {
+    "@type": "oa:TextualBody",
+    "oa:value": [
+      "Taxonomy should be Turdus pilaris Linnaeus, 1758"
+    ],
+    "ods:score": 0.9
+  }
+}
+```
+
+**Good - Editing or Adding information**
+
+The following annotation targets a specific term (using the `ods:TermSelector`) to modify a specific
+taxonomic field:
+
+```json
+{
+  "oa:motivation": "ods:editing",
+  "oa:hasTarget": {
+    "@id": "https://doi.org/10.3535/XYZ-XYZ-XYZ",
+    "@type": "ods:DigitalSpecimen",
+    "oa:hasSelector": {
+      "@type": "ods:TermSelector",
+      "ods:term": "$['ods:hasTaxonIdentifications'][0]['dwc:scientificName']"
+    }
+  },
+  "oa:hasBody": {
+    "@type": "oa:TextualBody",
+    "oa:value": [
+      "Turdus pilaris Linnaeus, 1758"
+    ]
+  }
+}
+```
+
+The following annotation adds a full TaxonIdentification:
+
+```json
+
+{
+  "oa:motivation": "ods:editing",
+  "oa:hasTarget": {
+    "@id": "https://doi.org/10.3535/XYZ-XYZ-XYZ",
+    "@type": "ods:DigitalSpecimen",
+    "oa:hasSelector": {
+      "@type": "ods:ClassSelector",
+      "ods:term": "$['ods:hasTaxonIdentifications'][0]"
+    }
+  },
+  "oa:hasBody": {
+    "@type": "oa:TextualBody",
+    "oa:value": {
+      "@id": "https://www.catalogueoflife.org/data/taxon/92GWM",
+      "@type": "ods:TaxonIdentification",
+      "dwc:taxonID": "https://www.catalogueoflife.org/data/taxon/92GWM",
+      "dwc:scientificName": "Nymphalis Kluk, 1802",
+      "ods:scientificNameHTMLLabel": "<i>Nymphalis</i> Kluk, 1802",
+      "dwc:scientificNameAuthorship": "Kluk, 1802",
+      "dwc:namePublishedInYear": "1802",
+      "dwc:taxonRank": "GENUS",
+      "dwc:kingdom": "Animalia",
+      "dwc:phylum": "Arthropoda",
+      "dwc:class": "Insecta",
+      "dwc:order": "Lepidoptera Linnaeus, 1758",
+      "dwc:family": "Nymphalidae",
+      "dwc:subfamily": "Nymphalinae",
+      "dwc:genus": "Nymphalis",
+      "dwc:taxonomicStatus": "ACCEPTED",
+      "dwc:nomenclaturalCode": "ICZN",
+      "dwc:superfamily": "Papilionoidea",
+      "dwc:tribe": "Nymphalini"
+    }
+  }
+}
+```
+
+In the above examples, the annotations can easily be integrated into the existing specimen.
+
+{: .note }
+When developing your MAS wrapper, consider the combination of selector, motivation, and content to
+ensure your annotations can be integrated in the future.
+
 # Data Schemas
 
 JSON Schemas are hosted on our [schemas site](https://schemas.dissco.tech/schemas/). Refer to the
