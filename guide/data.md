@@ -77,15 +77,14 @@ without additional work.
     "@type": "ods:DigitalSpecimen",
     "oa:hasSelector": {
       "@type": "ods:ClassSelector",
-      "ods:term": "$['ods:hasTaxonIdentifications'][0]"
+      "ods:class": "$['ods:hasTaxonIdentifications']"
     }
   },
   "oa:hasBody": {
     "@type": "oa:TextualBody",
     "oa:value": [
       "Taxonomy should be Turdus pilaris Linnaeus, 1758"
-    ],
-    "ods:score": 0.9
+    ]
   }
 }
 ```
