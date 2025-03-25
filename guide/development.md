@@ -170,7 +170,7 @@ import logging
 
 def run_local():
   response = requests.get(
-    'https://sandbox.dissco.tech/apidigital-specimen/v1/SANDBOX/3L8-AS3-E1T')
+    'https://sandbox.dissco.tech/api/digital-specimen/v1/SANDBOX/3L8-AS3-E1T')
   specimen = json.loads(response.content).get("data").get(
     'attributes')  # Extract data from API call
   result = run_mas(specimen)  # Run your MAS service
