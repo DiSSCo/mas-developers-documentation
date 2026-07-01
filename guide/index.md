@@ -8,7 +8,7 @@ nav_order: 2
 # Let's get started!
 
 This guide will walk you through the steps of developing MAS middleware for your existing value
-service. The process for developing a MAS middleware can be summarized as follows:
+service. The process for developing a MAS middleware can be summarised as follows:
 
 | Step                                                                                            | Section                                                                         
 |:------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------|
@@ -33,5 +33,5 @@ role in advancing biodiversity research. Whether through novel machine learning 
 georeferencing tools, or automated data checks, the contribution helps improve natural science
 collection data quality across Europe. Machine Annotation Services not only support ongoing
 research, but also empower the scientific community to engage in meaningful post-publication
-curation. This collaborative approach enhances the value of digitized collections, ensuring they
-remain relevant and up to-date long after their initial publication.
+curation. This collaborative approach enhances the value of digitised collections, ensuring they
+remain relevant and up-to-date long after their initial publication.

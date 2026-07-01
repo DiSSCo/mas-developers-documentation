@@ -35,7 +35,7 @@ should meet the following requirements:
 
 ## Deploying with Docker
 
-When you've completed developing your MAS middleware, you're ready to containerize it. These
+When you've completed developing your MAS middleware, you're ready to containerise it. These
 services are deployed as a container image in DiSSCo. As such, make sure
 there is a valid Dockerfile in the source code.
 

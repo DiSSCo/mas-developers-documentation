@@ -15,8 +15,8 @@ nav_order: 3
 Before we can delve into how MASs connect to the DiSSCo architecture, it is useful to know how the
 DiSSCo architecture operates.
 
-As a platform, DiSSCo sits in between data providers and data consumers. The core architecture adds
-value by harmonizing data to openDS, minting unique identifiers for specimens and media objects,
+As a platform, DiSSCo sits in-between data providers and data consumers. The Core Architecture adds
+value by harmonising data to OpenDS, minting unique identifiers for specimens and media objects,
 capturing provenance, and, of course, facilitating annotations. As DiSSCo improves the data, DiSSCo
 will send this enhanced data upstream, back to the data providers, and downstream, to data
 aggregators (though this functionality is currently in development).

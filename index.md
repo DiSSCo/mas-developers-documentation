@@ -17,7 +17,7 @@ effort.
 
 # About DiSSCo
 
-DiSSCo is a research infrastructure supporting **digitized natural science** collections. With over
+DiSSCo is a research infrastructure supporting **digitised natural science** collections. With over
 200 partners in 23 countries, DiSSCo aims to digitally unify all European natural science assets.
 It provides digital specimens and digital media objects from diverse collections in a **single
 harmonised data model**, openDS. These harmonised data are made available through a user-friendly
@@ -33,7 +33,7 @@ An annotation is an additional piece of information associated with a specimen o
 annotation is initially separate from its target. The annotation is then evaluated by experts, who
 may reject or accept the annotation. An accepted annotation may then change the specimen or media
 object in the source system. This approach allows for widespread community curation of the entire
-digitized European collection.
+digitised European collection.
 
 _Also see
 the [annotation JSON Schema](https://schemas.dissco.tech/schemas/fdo-type/annotation/latest/annotation.json)_.
@@ -91,7 +91,7 @@ user in DiSSCover. MASs often use external APIs or AI to produce their annotatio
 
 # Why develop a MAS?
 
-If you've developed a service that analyzes specimen data, you may be wondering why bother with
+If you've developed a service that analyses specimen data, you may be wondering why bother with
 publishing it on
 DiSSCo. Haven't you done enough work?
 
