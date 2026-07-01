@@ -1,0 +1,15 @@
+# Jekyll build output
+_site/
+.jekyll-metadata
+.jekyll-cache/
+
+# Sass cache
+.sass-cache/
+
+# Local configuration overrides (if any)
+_config.yml.tmp
+_config.yml.dev
+
+# OS-specific files
+.DS_Store
+Thumbs.db
