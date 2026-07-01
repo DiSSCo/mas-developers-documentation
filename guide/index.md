@@ -22,19 +22,15 @@ service. The process for developing a MAS middleware can be summarized as follow
 {: .note }
 > When an existing service is adapted to work within DiSSCo, there are two components involved:
 >
-> - **Value Service**: This is the original service being adapted to DiSSCo. It is deployed on
-    infrastructure separate from the core DiSSCo architecture, and should be accessible through
-    APIs.
-> - **MAS Middleware**: This is a lightweight component containerized and deployed on the DiSSCo
-    core
-    architecture.
+> - **Value Service**: This is the original service being adapted to DiSSCo. It is deployed on infrastructure separate from the core DiSSCo architecture, and should be accessible through APIs.
+> - **MAS Middleware**: This is a lightweight component containerised and deployed on the DiSSCo core architecture.
 
 # Thank you!
 
 Thank you for your commitment to enhancing the DiSSCo community through the development and
 deployment of MASs. By following the guidelines outlined in this guide, you are playing a crucial
 role in advancing biodiversity research. Whether through novel machine learning approaches,
-georeferencing tools, or automated data checks, the contribution of help improve natural science
+georeferencing tools, or automated data checks, the contribution helps improve natural science
 collection data quality across Europe. Machine Annotation Services not only support ongoing
 research, but also empower the scientific community to engage in meaningful post-publication
 curation. This collaborative approach enhances the value of digitized collections, ensuring they

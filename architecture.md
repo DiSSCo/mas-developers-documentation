@@ -39,28 +39,25 @@ Other value services of DiSSCo:
 - Harmonising data to OpenDS
 - Minting Persistent Identifiers (PIDs) for resources
 - Versioning objects and maintaining a provenance record
-- Extending data and linking
+- Extending and linking data
 - Exposing data through APIs, including a robust search function
 
 # Machine Annotation Services
 
-A Machine Annotation Service (MAS)  is an automated service that annotates a target in DiSSCo. Most
-often, MASs are scheduled by a user on a specific target - either a digital specimen or a media
-object -- either through the DiSSCover platform or programmatically through the DiSSCo API.
+A Machine Annotation Service (MAS) is an automated service that annotates a target in DiSSCo. Most
+often, MASs are scheduled by a user on a specific target (a digital specimen or a media
+object)—either through the DiSSCover platform or programmatically through the DiSSCo API.
 
 {: .note }
+
 > When an existing service is adapted to work within DiSSCo, there are two components involved:
 >
-> - **Value Service**: This is the original service being adapted to DiSSCo. It is deployed on
-    infrastructure separate from the core DiSSCo architecture, and should be accessible through
-    APIs.
-> - **MAS Middleware**: This is a lightweight component containerized and deployed on the DiSSCo
-    core
-    architecture.
+> - **Value Service**: This is the original service being adapted to DiSSCo. It is deployed on infrastructure separate from the DiSSCo Core Architecture, and should be accessible through APIs.
+> - **MAS Middleware**: This is a lightweight component containerised and deployed on the DiSSCo Core Architecture.
 
-## When a machine makes an annotation
+## When a Machine Makes an Annotation
 
-The flow of data can be summarised below:
+The flow of data is summarised below:
 
 **1. The user requests a job**
 
@@ -73,29 +70,32 @@ DiSSCo uses [Apache Kafka](https://kafka.apache.org/) as an asynchronous messagi
 machine annotation is requested, a "job" is created. A UUID is generated and associated with this
 process to track the state of the job. When it is first created, the job is marked as `SCHEDULED`.
 
-The backend sends a message through Kafka. This message that includes the job ID and the target of
+The backend sends a message through Kafka. This message includes the job ID and the target of
 the annotation. The message has a topic that identifies the message's destination. Each MAS is given
 its own unique topic by DiSSCo.
 
 **3. The job is received by the MAS middleware**
 
-Listening for a Kafka message on its topic, the MAS receives the message.
+After it started listening for a Kafka message on its topic, the MAS eventually receives the message.
 
-**3a. (Recommended) The MAS middleware informs the backend the job was received.**
+**3a. (Recommended) The MAS middleware informs the backend the job was received**
 
 It is strongly recommended that once the MAS receives the message, it informs the backend. This
 improves user experience. The MAS sends the job id to the `/running` endpoint. The backend, in turn,
 marks the job as `RUNNING` and informs the user.
 
 **4. The MAS middleware calls the value service**
+
 The MAS middleware extracts relevant information from the target and sends it to the value service,
 usually through an API call. The results from the value service are formatted into an annotation
 event.
 
 **5. The results are sent to DiSSCo**
+
 The MAS middelware sends the formatted annotation event through the `annotation` Kafka topic.
 
 **6. The annotation is processed**
+
 DiSSCo's annotation processing service picks up the message in the `annotation` topic and processes
 it. The annotation is then available through the DiSSCo API and the DiSSCover interface.
 

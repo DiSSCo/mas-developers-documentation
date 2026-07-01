@@ -19,7 +19,7 @@ does your service add?
 Some questions to consider:
 
 - Does your service target digital specimens or media objects?
-- If your service returns textual information, can its results be best mapped to terms or
+- If your service returns textual information, can its results be mapped to terms or
   classes in OpenDS? Or does your service apply information to the entire target?
 - If your service returns information or predictions about a region, how can its region be mapped to
   the region of interest selector in the annotation data model?
@@ -30,32 +30,33 @@ Some questions to consider:
   batching annotations. See [Batching Annotations](#batching-annotations) for more information.
 
 {: .note }
-You can find more about openDS on the [OpenDS terms site](https://terms.dissco.tech/)
+You can find more about openDS on the [OpenDS terms site](https://terms.dissco.tech/).
 
 ## What makes a good annotation?
 
 When an annotation is accepted, it updates the specimen with new, valuable information.
 A good annotation can be easily integrated into the target once it is accepted.
 
-- `oa:value`: the value of the annotation ("**What** does the annotation say?")
-- `ods:hasSelector`: the part of the target you're annotating ("**Where** is the annotation going?")
-- `oa:motivation`: Motivation for what why the annotation was produced (**How** is the information
-  integrated)
+- `oa:value`: The value of the annotation ("**What** does the annotation say?")
+- `ods:hasSelector`: The part of the target you're annotating ("**Where** is the annotation going?")
+- `oa:motivation`: Motivation for why the annotation was produced ("**How** is the information
+  integrated?")
 
 {: .note}
+
 > The available motivations are: `ods:adding`, `ods:deleting`, `oa:assessing`, `oa:editing`,
-`oa:commenting`.
+> `oa:commenting`.
 > Only the `ods:adding` may reference a part of the target that doesn't exist yet because you are
 > adding information to the target.
 > Read more about [motivations](/mas-developers-documentation/#why-make-an-annotation)
-> and [selectors](/mas-developers-documentation/#what-can-be-annotated)
+> and [selectors](/mas-developers-documentation/#what-can-be-annotated).
 
-### Example
+### Examples
 
 Say you have a MAS that identifies taxonomy from an image. Your MAS should target the
 `ods:hasTaxonIdentifications` class of a specimen.
 
-*Note: Some fields have been removed from the example annotations for brevity*
+_Note: Some fields have been removed from the example annotations for brevity._
 
 **Bad - Commenting on the specimen**
 
@@ -234,8 +235,8 @@ The response from the MAS to the DiSSCo Architecture must follow the following s
 
 Filters are a valuable tool for ensuring that only relevant digital objects are processed by the
 MAS. Based on the OpenDS specification, filters define the criteria an object must meet for the MAS
-to be applied. A MAS can filter objects on any term in OpenDs. Filters are provided in JSON Path
-Block notation and support wildcards.
+to be applied. A MAS can filter objects on any term in OpenDS. Filters are provided in JSONPath
+block notation and support wildcards.
 
 When registering a MAS, providers can define filters to specify which objects their MAS will
 annotate. If a MAS has a filter applied, it will only be available for resources that meet the
@@ -276,7 +277,7 @@ filters need to begin with `$['digitalSpecimen']`.**
 
 {: .note}
 To see which fields are in the media data model, and which fields are in the specimen data model,
-see the [OpenDS terms page](https://terms.dissco.tech/)
+see the [OpenDS terms page](https://terms.dissco.tech/).
 
 A filter for a MAS that targets media objects, but needs the subject to be a botany specimen, may
 have the following filters:
@@ -302,7 +303,7 @@ discipline "Botany".
 ## ods:FDOType
 
 FDO (FAIR Digital Object) Types are blueprints for digital objects. In OpenDS, a unique, resolvable
-identifier is used to specify Type of an object. Filtering by FDO Type is particularly useful, as it
+identifier is used to specify the Type of an object. Filtering by FDO Type is particularly useful, as it
 helps distinguish between different kinds of objects in DiSSCo.
 
 The two key Types in DiSSCo are:
@@ -330,7 +331,7 @@ resources, streamlining the process and conserving resources. For example, a MAS
 information from a specimen and return a set of georeferenced coordinates. If this service is
 batched, then all specimens with the same locality string will receive the same coordinate
 annotation, with the original calculation only made once. Batching reduces load on the
-original service, as it does not need to redundant calculations.
+original service, as it does not need to perform redundant calculations.
 
 To enable this process, MASs can include batchMetadata in their response. The information provided
 in the batchMetadata allows DiSSCo to generate search queries that identify resources matching the
@@ -344,7 +345,7 @@ services. For instance, a service which finds identifiers in other infrastructur
 same result to different objects, as the result of the service is by nature unique to its original
 target.
 
-The schema for batchMetadata can be found here, and it includes the following key fields:
+The schema for `batchMetadata` can be found [here](https://schemas.dissco.tech/schemas/developer-schema/annotation/0.4.0/annotation-batch-metadata.json), and it includes the following key fields:
 
 ```json
 {
@@ -392,20 +393,20 @@ The schema for batchMetadata can be found here, and it includes the following ke
 }
 ```
 
-`placeInBatch`: Integer that indicates which annotation this batch metadata corresponds to. There
-MUST be a corresponding "placeInBatch" value in one annotation in the event. If more than one
+`ods:placeInBatch`: Integer that indicates which annotation this batch metadata corresponds to. There
+MUST be a corresponding `"ods:placeInBatch"` value in one annotation in the event. If more than one
 annotation
-have the same placeInBatch value, only the first annotation will be used to create a base
+have the same `ods:placeInBatch` value, only the first annotation will be used to create a base
 annotation.
 
-`inputField`: The full JSONPath of the field used to generate MAS annotation, in JSONPath block
+`inputField`: The full JSONPath of the field used to generate the MAS annotation, in JSONPath block
 notation,
-e.g. ['ods:DigitalSpecimen']['ods:hasIdentifications'][*]['ods:hasTaxonIdentifications'][*]['dwc:taxonRank'].
-Array indexes must be omitted - instead, use wildcards.
+e.g. `['ods:DigitalSpecimen']['ods:hasIdentifications'][\*]['ods:hasTaxonIdentifications'][\*]['dwc:taxonRank']`.
+Array indexes must be omitted—instead, use wildcards.
 
-`inputValue`: value stored at the specified JSONPath.
+`inputValue`: Value stored at the specified JSONPath.
 
-Batching can only be done if the MAS sends annotations of one Type of object in one event - either
+Batching can only be done if the MAS sends annotations of one Type of object in one event—either
 Digital Specimens OR Media Objects.
 
 # Moving Forward - Checklist

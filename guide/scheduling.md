@@ -8,7 +8,7 @@ nav_order: 4
 
 # Scheduling a MAS
 
-You can schedule a MAS in 2 ways: programmatically, through the API, and manually through the
+You can schedule a MAS in 2 ways: programmatically (through the API), and manually through the
 DiSSCover User interface.
 
 {: .note}
@@ -27,21 +27,21 @@ ORCID? [Register for one here](https://orcid.org/register)!
 **2. Select a Target**
 
 Search for a specimen through the DiSSCover interface and find a suitable target. You may filter on
-discipline, taxonomy, organisation, if the specimen has media, and many other parameters.
+discipline, taxonomy, organisation, whether the specimen has media, and many other parameters.
 
 **3a. Annotate a Specimen**
 
-When you find specimen you want to annotate, you will come to the specimen overview page:
+When you find a specimen you want to annotate, you will come to the specimen overview page:
 
 ![DiSSCover specimen overview page](../assets/disscover_specimen_1.png)
 
-To open the annotation menu, select the "Annotate" button (circled red in above image). This will
+To open the annotation menu, select the "Annotate" button (circled in red in the image above). This will
 open the annotation menu.
 
 ![Annotation overview page](../assets/disscover_specimen_2.png)
 
 Select the "Machine Annotation Services" button at the bottom, then "Schedule a MAS" on the top
-left.
+right.
 
 ![MAS overview page](../assets/disscover_specimen_3.png)
 
@@ -53,8 +53,9 @@ Click "Schedule" to schedule the selected MASs.
 The MAS may take a few minutes to run. When complete, it will have a green check mark next to it.
 
 **3b. Annotate a Digital Media Object**
+
 If the MAS you want to schedule is designed for media objects, it won't come up in the digital
-specimen overview. Instead, navigate to the "digital media" tab and click on the media preview to be
+specimen overview. Instead, navigate to the "Digital Media" tab and click on the media preview to be
 taken to the digital media page:
 
 ![Digital media overview page](../assets/disscover_media_1.png)
@@ -71,5 +72,5 @@ and [/digital-media/{mas}](https://dev.dissco.tech/api/docs/swagger-ui/index.htm
 endpoints for more information.
 
 {: .note}
-in order to use the API to schedule MASs, you will need an authenticated token. Reach out to
+In order to use the API to schedule MASs, you will need an authenticated token. Reach out to
 the DiSSCo team for more information.
