@@ -160,16 +160,16 @@ modelling section.
 Additional metadata is useful for providing users with more information about the service. Please
 provide as many of the following terms as possible.
 
-- name of the service (required)
-- description
-- creativeWorkStatus - The current status of the service
-- codeRepository - Link to code base of MAS
-- programmingLanguage
-- serviceAvailability - Availability commitment of the service provider as described in the SLA
-- maintainer (Follows Agent data model)
-- license
-- Contact point (Description, email, url, phone)
-- SLA Documentation
+- `name` of the service (required)
+- `description`
+- `creativeWorkStatus` - The current status of the service
+- `codeRepository` - Link to code base of MAS
+- `programmingLanguage`
+- `serviceAvailability` - Availability commitment of the service provider as described in the SLA
+- `maintainer` (Follows Agent data model)
+- `license`
+- Contact point (Description, email, URL, phone)
+- Service Level Agreement (SLA) Documentation
 
 {: .note}
 See

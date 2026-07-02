@@ -60,7 +60,7 @@ for msg in consumer:
 
 To get started on development, you can fork
 the [MAS Template](https://github.com/DiSSCo/machine-annotation-service-template) on GitHub. The
-`annotation` package contains code that will format a result forom an API to the openDS annotation
+`annotation` package contains code that will format a result from an API to the OpenDS annotation
 model. Two templates are provided: a default template and a batch template.
 
 There are also some functional MASs available
@@ -70,10 +70,10 @@ on [GitHub](https://github.com/diSSCo/demo-enrichment-service-image/) you may us
 
 As an added value service to the user, DiSSCo tracks the progress of a job through states:
 
-- SCHEDULED
-- RUNNING
-- COMPLETED
-- FAILED
+- `SCHEDULED`
+- `RUNNING`
+- `COMPLETED`
+- `FAILED`
 
 When a MAS receives a message, it is strongly recommended to call the `/running` endpoint. This
 indicates to DiSSCo the message has been received by the MAS and the job is running. DiSSCo can then
@@ -102,37 +102,37 @@ Your MAS may have multiple, distinct contributions to a target. There are two wa
    in the body are part of the same annotation, meaning they have the same motivation, target,
    selector (what part of the target does the annotation apply to), and other parameters.
 
-   **Use multiple bodies when**: Your MAS has multiple insights on the same part of the target, with
-   the same motivation. Example: An AI service that provides two different classifications on the
-   same region of interest.
+    **Use multiple bodies when**: Your MAS has multiple insights on the same part of the target, with
+    the same motivation. Example: An AI service that provides two different classifications on the
+    same region of interest.
 
 2. **Multiple annotations**: The Kafka message sent by your MAS must adhere to the annotation
    processing
    event ([schema](https://schemas.dissco.tech/schemas/developer-schema/annotation/latest/annotation-processing-event.json)).
    This event contains an array of annotations on the same target.
 
-   **Use a list annotations when**: Your MAS has multiple insights on different parts of the target,
-   or produces annotations with different motivations. For example, an AI service that classifies
-   different segments of an image, or a taxonomic service that assesses different taxonomic fields (
-   e.g. dwc:genus and dwc:species).
+    **Use a list annotations when**: Your MAS has multiple insights on different parts of the target,
+    or produces annotations with different motivations. Example: An AI service that classifies
+    different segments of an image, or a taxonomic service that assesses different taxonomic fields (
+    e.g. `dwc:genus` and `dwc:species`).
 
 ## If Your MAS has No Insights
 
 If your MAS finds no results, that is still useful information for the user. A "no annotation"
 annotation may provide useful insights into the target. If a plant organ detection tool finds no
-plant organs, a species recognition tool can not identify the specimen, or a locality can not be
+plant organs, a species recognition tool cannot identify the specimen, or a locality cannot be
 georeferenced, that information should still be captured in an annotation.
 
 Qualities of a "no annotation" annotation:
 
-* **oa:motivation**: The motivation should be `oa:commenting`
-* **ods:hasSelector**: The selector determines which field(s) of the target are targeted. Note that
+- **`oa:motivation`**: The motivation should be `oa:commenting`
+- **`ods:hasSelector`**: The selector determines which field(s) of the target are targeted. Note that
   a `commenting` annotation may not be on a field that doesn't exist in the target.
-    * The selector type may either be `ods:ClassSelector` or `ods:TermSelector`
-    * Which field or class you target in this kind of annotation depends on your MAS, but
-* **oa:value**: A simple message for the user indicating this job has no results: Examples:
-    * "Unable to find a match"
-    * "Too many potential matches"
+    - The selector type may either be `ods:ClassSelector` or `ods:TermSelector`
+    - Which field or class you target in this kind of annotation depends on your MAS
+- **`oa:value`**: A simple message for the user indicating this job has no results. Examples:
+    - "Unable to find a match"
+    - "Too many potential matches"
 
 ## If your MAS Fails (Exception Handling)
 
@@ -156,7 +156,7 @@ message you want to pass to DiSSCo.
 
 # Testing
 
-Before your MAS is integrated into the DiSSCo architecture, you may test it locally. The easiest way
+Before your MAS is integrated into the DiSSCo Architecture, you may test it locally. The easiest way
 is to run your MAS on a target from DiSSCover, and compare the results against
 the [annotation event schema](https://schemas.dissco.tech/schemas/developer-schema/annotation/latest/annotation-processing-request.json).
 You can see `run_local()` methods in the demo enrichment services on GitHub, or use the following

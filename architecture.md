@@ -12,8 +12,8 @@ nav_order: 3
 - TOC
 {:toc}
 
-Before we can delve into how MASs connect to the DiSSCo architecture, it is useful to know how the
-DiSSCo architecture operates.
+Before we can delve into how MASs connect to the DiSSCo Architecture, it is useful to know how the
+DiSSCo Architecture operates.
 
 As a platform, DiSSCo sits in-between data providers and data consumers. The Core Architecture adds
 value by harmonising data to OpenDS, minting unique identifiers for specimens and media objects,
@@ -21,15 +21,15 @@ capturing provenance, and, of course, facilitating annotations. As DiSSCo improv
 will send this enhanced data upstream, back to the data providers, and downstream, to data
 aggregators (though this functionality is currently in development).
 
-Due to its flexible nature, additional services can be built on top of the DiSSCo core architecture.
+Due to its flexible nature, additional services can be built on top of the DiSSCo Core Architecture.
 A MAS is one such service. What a MAS does is essentially a "black box" from the DiSSCo
-Architecture's perspective. A MAS receives a message as input and produces an annotation as an
+Architecture's perspective. A MAS receives a message as input and produces an annotation as
 output.
 
 The DiSSCo position in the biodiversity data landscape is illustrated in the following diagram. On
 the left, data providers send data to the core infrastructure. In the middle, machine and human
-agents rest on top of the
-core infrastructure, adding additional value. On the right, the enriched data is sent to data
+agents provide additional value, resting on top of the
+core infrastructure. On the right, the enriched data is sent to data
 consumers.
 
 ![DiSSCo's position in the biodiversity data landscape](assets/dissco_arch.png)
@@ -103,11 +103,10 @@ it. The annotation is then available through the DiSSCo API and the DiSSCover in
 
 ## MAS Deployment
 
-The MAS middleware application is deployed as a container on the DiSSCo core architecture. The value
+The MAS middleware application is deployed as a container on the DiSSCo Core Architecture. The value
 service will remain deployed where it was originally.
 
 {: .note}
 The MAS middleware is deployed on the DiSSCo network. If your value service requires whitelisting a
 specific IP address, let the DiSSCo team know so they can provide your MAS middleware with a static
-IP address. That way, the middleware may communicate with the value service. 
-
+IP address. That way, the middleware may communicate with the value service.

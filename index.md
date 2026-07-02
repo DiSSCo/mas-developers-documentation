@@ -55,11 +55,11 @@ annotation may be as broad, or as narrow, as necessary. This is called the "sele
 specifically to the data according to the OpenDS specification.
 
 - **Whole object**: The whole specimen or media is being annotated
-- **Class**: A whole class (e.g. TaxonIdentification or Event) is being annotated
-- **Term**: A specific, individual property (e.g. dwc:genus or dwc:locality)
+- **Class**: A whole class (e.g. `TaxonIdentification` or `Event`) is being annotated
+- **Term**: A specific, individual property (e.g. `dwc:genus` or `dwc:locality`)
 - **Region of Interest**: (Media only) A specific area of the image is being annotated
 
-*What terms can be annotated?* The [DiSSCo Terms Site](https://terms.dissco.tech/) has the most up
+_What terms can be annotated?_ The [DiSSCo Terms Site](https://terms.dissco.tech/) has the most up
 to-date information on openDS terms.
 
 ## Why make an annotation?
