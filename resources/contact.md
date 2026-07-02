@@ -6,9 +6,10 @@ parent: Resources
 ---
 
 # Contact
+
 Have a general question? [Create an issue on this repository](https://github.com/DiSSCo/mas-developers-documentation/issues/new?template=Blank+issue)!
 
-if you're interested in developing a MAS with DiSSCo, please reach out!
+If you're interested in developing a MAS with DiSSCo, please reach out!
 
 > **Soulaine Theocharides**
 >
