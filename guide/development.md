@@ -13,47 +13,87 @@ nav_order: 2
 Once you know your inputs and outputs of your MAS middleware, you're ready to start developing.
 
 - TOC
-{:toc}
+  {:toc}
 
-# Apache Kafka
+# RabbitMQ
 
-DiSSCo communicates with MASs through an Apache Kafka messaging queue. Kafka allows events, such as
+DiSSCo communicates with MASs through an RabbitMQ messaging queue. RabbitMQ allows events, such as
 tasks or data updates, to be sent between systems in a highly reliable and
-scalable way. When a user schedules a MAS via the DiSSCover platform, DiSSCo dispatches a Kafka
-message to the designated MAS, initiating the annotation process.
+scalable way. When a user schedules a MAS via the DiSSCover platform, DiSSCo dispatches a
+message to the queue of the designated MAS. The auto-scaler will recognise there is a message pending and will start an
+instance of them MAS.
 
-Kafka topics are unique names used to organize messages. Kafka producers write data to topics, and
-consumers read data from topics. You will need to set up a kafka topic provided by
-the DiSSCo team. Your MAS will send its result as a kafka message of the same topic. It is best to
-store this topic name in an environment variable.
+For each MAS a specific RabbitMQ topic will be created. This topic is created when a new MAS is added through the
+orchestration portal. For the MAS it is important that on start up the MAS starts to listen to the queue.
+It can then start consuming messages one at a time. The resulting annotation of the MAS is also published to RabbitMQ.
+Based on this message the annotation-processing service will be triggered which start processing the new annotations.
 
-In python, you can easily set up a producer like so:
+We have tried to make the integration with RabbitMQ as easy as possible.
+The following boiler plate code can be used to start the listening:
 
 ```python
-import os
-import json
-from kafka import KafkaConsumer, KafkaProducer
-
-consumer = KafkaConsumer(os.environ.get('KAFKA_CONSUMER_TOPIC'),
-                         group_id=os.environ.get('KAFKA_CONSUMER_GROUP'),
-                         bootstrap_servers=[os.environ.get('KAFKA_CONSUMER_HOST')],
-                         value_deserializer=lambda m: json.loads(m.decode('utf-8')),
-                         enable_auto_commit=True)
-producer = KafkaProducer(bootstrap_servers=[os.environ.get('KAFKA_PRODUCER_HOST')],
-                         value_serializer=lambda m: json.dumps(m).encode('utf-8'))
+def run_rabbitmq() -> None:
+    """
+    Start a RabbitMQ consumer and process the messages by unpacking the image.
+    When done, it will publish an annotation to annotation processing service
+    """
+    connection = pika.BlockingConnection(
+        pika.ConnectionParameters(
+            os.environ.get("RABBITMQ_HOST"),
+            credentials=pika.PlainCredentials(os.environ.get("RABBITMQ_USER"), os.environ.get("RABBITMQ_PASSWORD")),
+        )
+    )
+    channel = connection.channel()
+    channel.basic_consume(queue=os.environ.get("RABBITMQ_QUEUE"), on_message_callback=process_message, auto_ack=True)
+    channel.start_consuming()
 ```
 
-The environmental variables (`KAFKA_CONSUMER_TOPIC`, `KAFKA_CONSUMER_GROUP`, `KAFKA_CONSUMER_HOST`,
-`KAFKA_PRODUCER_HOST`) are injected into the service by DiSSCo when the service is deployed.
+The environmental variables (`RABBITMQ_HOST`, `RABBITMQ_USER`, `RABBITMQ_PASSWORD`,
+`RABBITMQ_QUEUE`) are injected into the service by DiSSCo when the service is deployed.
 
-You can capture incoming messages using the `consumer`. The following code will only run when a
-message is sent with the topic defined previously.
+This starts up the listener. Messages can then be processed in the process_message method:
 
 ```python
 
-for msg in consumer:
-  json_value = msg.value
-  object_data = json_value['data']
+def process_message(channel: BlockingChannel, method: Method, properties: Properties, body: bytes) -> None:
+    """
+    Callback function to process the message from RabbitMQ. This method will be called for each message received.
+    We publish this annotation through the channel on a RabbitMQ exchange.
+    :param channel: The RabbitMQ channel, which we will use to publish the resulting annotation
+    :param method: The method used to send the message, not currently used
+    :param properties: Properties of the message, not currently used
+    :param body: The message body in bytes
+    :return:
+    """
+    json_value = json.loads(body.decode("utf-8"))
+    try:
+        shared.mark_job_as_running(json_value.get("jobId"))
+        specimen_data = json_value.get("object")
+        result = run_api_call(specimen_data)
+        annotation_event = map_to_annotation_event(specimen_data, result, json_value.get("jobId"))
+        publish_annotation_event(annotation_event, channel)
+    except Exception as e:
+        shared.send_failed_message(json_value.get("jobId"), str(e), channel)
+```
+
+Once the annotations are created the can be published by added the
+`publish_annotation_event(annotation_event, channel)`:
+
+```python
+
+def publish_annotation_event(annotation_event: Dict, channel: BlockingChannel) -> None:
+    """
+    Send the annotation to the RabbitMQ queue
+    :param annotation_event: The formatted annotation event
+    :param channel: A RabbitMQ BlockingChannel to which we will publish the annotation
+    :return: Will not return anything
+    """
+    logging.info("Publishing annotation: " + str(annotation_event))
+    channel.basic_publish(
+        exchange=os.environ.get("RABBITMQ_EXCHANGE", "mas-annotation-exchange"),
+        routing_key=os.environ.get("RABBITMQ_ROUTING_KEY", "mas-annotation"),
+        body=json.dumps(annotation_event).encode("utf-8"),
+    )
 ```
 
 # Templates
@@ -106,15 +146,16 @@ Your MAS may have multiple, distinct contributions to a target. There are two wa
    the same motivation. Example: An AI service that provides two different classifications on the
    same region of interest.
 
-2. **Multiple annotations**: The kafka message sent by your MAS must adhere to the annotation
+2. **Multiple annotations**: The RabbitMQ message sent by your MAS must adhere to the annotation
    processing
-   event ([schema](https://schemas.dissco.tech/schemas/developer-schema/annotation/latest/annotation-processing-event.json)).
+   event
+   ([schema](https://schemas.dissco.tech/schemas/developer-schema/annotation/latest/annotation-processing-event.json)).
    This event contains an array of annotations on the same target.
 
    **Use a list annotations when**: Your MAS has multiple insights on different parts of the target,
    or produces annotations with different motivations. For example, an AI service that classifies
-   different segments of an image, or a taxonomic service that assesses different taxonomic fields (
-   e.g. dwc:genus and dwc:species).
+   different segments of an image, or a taxonomic service that assesses different taxonomic fields (e.g. dwc:genus and
+   dwc:species).
 
 ## If Your MAS has No Insights
 
@@ -126,7 +167,7 @@ georeferenced, that information should still be captured in an annotation.
 Qualities of a "no annotation" annotation
 
 * **oa:motivation**: The motivation should be `oa:commenting`
-* **ods:hasSelector**: The selector determines which field(s) of the target are targeted. Note that
+* **ods:hasSelector**: The selector determines which field (s) of the target are targeted. Note that
   a `commenting` annotation may not be on a field that doesn't exist in the target.
     * The selector type may either be `ods:ClassSelector` or `ods:TermSelector`
     * Which field or class you target in this kind of annotation depends on your MAS, but
@@ -140,7 +181,8 @@ If your MAS experiences an exception for whatever reason, that information shoul
 DiSSCo. That information is used to mark the job as `FAILED` and inform the user of any errors.
 
 {: .note }
-Send the message to the kafka topic `mas-failed`, not the topic specific to your MAS.
+Send the message to the RabbitMQ topic `mas-annotation-failed-exchange` with topic `mas-annotation-failed`, not the
+topic specific to your MAS.
 
 The failure message has the following structure:
 
@@ -169,15 +211,15 @@ import logging
 
 
 def run_local():
-  response = requests.get(
-    'https://sandbox.dissco.tech/api/digital-specimen/v1/SANDBOX/3L8-AS3-E1T')
-  specimen = json.loads(response.content).get("data").get(
-    'attributes')  # Extract data from API call
-  result = run_mas(specimen)  # Run your MAS service
-  annotation_event = map_to_annotation_event(specimen_data, result,
-                                             str(
-                                               uuid.uuid4()))  # Turn result into an annotation event
-  logging.info("Created annotations: ", annotation_event)  # Validate this against schema
+    response = requests.get(
+        'https://sandbox.dissco.tech/api/digital-specimen/v1/SANDBOX/3L8-AS3-E1T')
+    specimen = json.loads(response.content).get("data").get(
+        'attributes')  # Extract data from API call
+    result = run_mas(specimen)  # Run your MAS service
+    annotation_event = map_to_annotation_event(specimen_data, result,
+                                               str(
+                                                   uuid.uuid4()))  # Turn result into an annotation event
+    logging.info("Created annotations: ", annotation_event)  # Validate this against schema
 ```
 
 # Moving Forward - Checklist
