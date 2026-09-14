@@ -10,7 +10,7 @@ nav_order: 3
 {: .no_toc }
 
 - TOC
-{:toc}
+  {:toc}
 
 Before we can delve into how MASs connect to the DiSSCo architecture, it is useful to know how the
 DiSSCo architecture operates.
@@ -69,17 +69,17 @@ DiSSCo backend to schedule a job.
 
 **2. The backend sends a message**
 
-DiSSCo uses [Apache Kafka](https://kafka.apache.org/) as an asynchronous messaging service. When a
+DiSSCo uses [RabbitMQ](https://www.rabbitmq.com/) as an asynchronous messaging service. When a
 machine annotation is requested, a "job" is created. A UUID is generated and associated with this
 process to track the state of the job. When it is first created, the job is marked as `SCHEDULED`.
 
-The backend sends a message through Kafka. This message that includes the job ID and the target of
+The backend sends a message through RabbitMQ. This message that includes the job ID and the target of
 the annotation. The message has a topic that identifies the message's destination. Each MAS is given
 its own unique topic by DiSSCo.
 
 **3. The job is received by the MAS middleware**
 
-Listening for a Kafka message on its topic, the MAS receives the message.
+Listening for a message on its topic, the MAS receives the message.
 
 **3a. (Recommended) The MAS middleware informs the backend the job was received.**
 
@@ -93,7 +93,8 @@ usually through an API call. The results from the value service are formatted in
 event.
 
 **5. The results are sent to DiSSCo**
-The MAS middelware sends the formatted annotation event through the `annotation` Kafka topic.
+The MAS middelware sends the formatted annotation event through the `mas-annotation-exchange` topic with routing-key
+`mas-annotation`.
 
 **6. The annotation is processed**
 DiSSCo's annotation processing service picks up the message in the `annotation` topic and processes
