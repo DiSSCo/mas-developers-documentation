@@ -17,7 +17,7 @@ aux_links:
 # External navigation links
 nav_external_links:
   - title: DiSSCover Sandbox Environment
-    url: https://disscover.dissco.eu/
+    url: https://sandbox.dissco.tech/
     opens_in_new_tab: true
   - title: OpenDS Terms Page
     url: https://terms.dissco.tech/
