@@ -11,7 +11,7 @@ nav_order: 2
 {: .no_toc }
 
 - TOC
-  {:toc}
+{:toc}
 
 Once you know your inputs and outputs of your MAS middleware, you're ready to start developing.
 
