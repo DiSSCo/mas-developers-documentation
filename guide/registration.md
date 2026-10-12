@@ -27,11 +27,11 @@ should meet the following requirements:
 
 - **Code Quality** : Code should be run through a code quality checker ("linter"). By default, the
   DiSSCo pipeline runs code through the linter SonarQube and requires 0 code smells to move forward.
-- **Requirements.txt**: Please include a `requirements.txt` file
-- **Valid Dockerfile**: Your service must include a valid Dockerfile
+- **Requirements.txt**: Please include a `requirements.txt` file.
+- **Valid Dockerfile**: Your service must include a valid Dockerfile.
 - **Workflow file**: Include a GitHub workflow yaml file for your service in the `.github/workflows`
   directory. It shoud be based
-  on [existing workflow files](https://github.com/DiSSCo/demo-enrichment-service-image/blob/main/.github/workflows/osm-georeferencing-pipeline.yml)
+  on [existing workflow files](https://github.com/DiSSCo/demo-enrichment-service-image/blob/main/.github/workflows/osm-georeferencing-pipeline.yml).
 
 ## Deploying with Docker
 
@@ -98,7 +98,7 @@ another email. Because it is not sensitive information, she can send the value o
 email. At the same time, she also informs the DiSSCo of the name of the variables.
 
 The DiSSCo team inserts the `API_KEY` in the secret store. Registering the MAS, the DiSSCo team
-includes the environmental variables and secrets, which
+includes the environmental variables and secrets, which are loaded into the DiSSCo Secret Store.
 
 The resulting kubernetes file will thus have all the information needed to access the secret and
 inject it into the running service. The following yaml will be generated and used in the deployment
