@@ -228,7 +228,7 @@ The response from the MAS to the DiSSCo Architecture must follow the following s
 - `jobId` is the unaltered jobId provided to the MAS in the request.
 - `annotations` is the list of annotations produced by the MAS. A MAS may produce multiple
   annotations per job on the same object. The annotations must follow
-  the [annotation schema for MAS developers](https://schemas.dissco.tech/schemas/developer-schema/annotation/0.4.0/annotation-processing-request.json)
+  the [annotation schema for MAS developers](https://schemas.dissco.tech/schemas/developer-schema/annotation/0.4.0/annotation-processing-request.json).
 
 # Filters
 
