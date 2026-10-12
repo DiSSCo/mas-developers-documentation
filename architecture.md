@@ -10,7 +10,7 @@ nav_order: 3
 {: .no_toc }
 
 - TOC
-  {:toc}
+{:toc}
 
 Before we can delve into how MASs connect to the DiSSCo architecture, it is useful to know how the
 DiSSCo architecture operates.
